@@ -1,0 +1,1001 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Paatti Vaithiyam — வழிவழி வைத்தியம்</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Catamaran:wght@400;500;600;700;800&family=Noto+Serif+Tamil:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --stone:#1d1712;
+  --stone-2:#2a221a;
+  --bronze:#a8763e;
+  --bronze-l:#c99a5f;
+  --maroon:#711f2b;
+  --maroon-l:#8f2c3a;
+  --gold:#c9a227;
+  --palm:#e7d9a9;
+  --palm-2:#f1e6c4;
+  --leaf:#33472e;
+  --ink:#2a1f14;
+  --ink-soft:#5a4a34;
+  --line:#c9b789;
+  --shadow: 0 14px 30px rgba(29,23,18,.28);
+}
+*{box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  margin:0;
+  background:
+    radial-gradient(1100px 500px at 15% -10%, #f4ead0 0%, transparent 60%),
+    repeating-linear-gradient(180deg, #efe2ba 0px, #efe2ba 2px, #ead8ab 3px, #efe2ba 4px),
+    var(--palm);
+  color:var(--ink);
+  font-family:'Catamaran',sans-serif;
+}
+button,input,textarea,select{font:inherit}
+button{cursor:pointer}
+a{color:inherit;text-decoration:none}
+.tamil{font-family:'Noto Serif Tamil',serif}
+h1,h2,h3{font-family:'Cormorant Garamond',serif;margin:0}
+
+/* ---------- header ---------- */
+.threadline{height:10px;background:
+  repeating-linear-gradient(90deg,var(--maroon) 0 26px, var(--gold) 26px 30px, var(--maroon) 30px 56px, var(--stone) 56px 60px);
+}
+.nav{
+  position:sticky;
+  top:0;
+  z-index:30;
+  background:var(--stone);
+  color:var(--palm-2);
+  padding:0 clamp(18px,4vw,48px);
+  height:84px;
+  display:flex;
+  align-items:center;
+  gap:34px;
+  border-bottom:3px solid var(--gold);
+}
+.brand{display:flex;align-items:center;gap:12px}
+.brandmark{width:46px;height:46px;flex:none}
+.brandname{font-family:'Cormorant Garamond',serif;font-weight:700;font-size:23px;line-height:1.1;letter-spacing:.2px}
+.brandname small{display:block;font-family:'Noto Serif Tamil',serif;font-size:12px;color:var(--gold);font-weight:500;margin-top:2px}
+.navlinks{display:flex;gap:26px;margin-left:20px;font-size:14px}
+.navlinks a{padding:8px 0;border-bottom:2px solid transparent;color:#e6d9b8}
+.navlinks a:hover,.navlinks a.active{border-color:var(--gold);color:#fff}
+#home,#remedies,#graph,#story,#shops{scroll-margin-top:100px}
+.nav-actions{margin-left:auto;display:flex;gap:10px}
+.btn{
+  border:1px solid var(--gold);
+  background:transparent;
+  color:var(--gold);
+  padding:10px 16px;
+  border-radius:2px;
+  font-size:13px;
+  font-weight:600;
+  letter-spacing:.3px;
+}
+.btn.solid{background:var(--maroon);border-color:var(--maroon);color:#fff}
+.btn.solid:hover{background:var(--maroon-l)}
+.btn:hover{background:#ffffff12}
+
+/* ---------- hero ---------- */
+.hero{
+  max-width:1180px;margin:0 auto;
+  padding:56px clamp(18px,4vw,0px) 40px;
+  display:grid;grid-template-columns:1.15fr .85fr;gap:44px;align-items:center;
+}
+.eyebrow{font-family:'Noto Serif Tamil',serif;color:var(--maroon);font-size:15px;font-weight:600;display:flex;align-items:center;gap:10px}
+.eyebrow:before{content:'';width:34px;height:2px;background:var(--maroon)}
+.hero h1{font-size:clamp(38px,4.6vw,58px);line-height:1.06;color:var(--stone);margin:14px 0 16px;letter-spacing:-.3px}
+.hero h1 em{font-style:normal;color:var(--maroon)}
+.hero p{font-size:16px;line-height:1.7;color:var(--ink-soft);max-width:480px;margin-bottom:24px}
+
+.search-wrap{position:relative;max-width:540px}
+.search{
+  display:flex;align-items:stretch;
+  background:var(--palm-2);
+  border:2px solid var(--stone);
+  box-shadow:4px 4px 0 var(--gold);
+}
+.search input{flex:1;border:0;background:transparent;padding:15px 16px;font-size:15px;color:var(--ink);outline:0}
+.search button{background:var(--maroon);color:#fff;border:0;padding:0 22px;font-weight:700;font-size:14px}
+.search button:hover{background:var(--maroon-l)}
+.suggestions{display:none;position:absolute;z-index:5;top:calc(100% + 6px);left:0;right:0;background:#fffef8;border:1px solid var(--line);box-shadow:var(--shadow)}
+.suggestions.show{display:block}
+.suggestion{padding:11px 16px;font-size:13.5px;border-bottom:1px solid #eee1bd;cursor:pointer}
+.suggestion:hover{background:var(--palm-2)}
+.chips{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.chip{border:1px solid var(--ink-soft);background:transparent;color:var(--ink-soft);border-radius:20px;padding:6px 13px;font-size:12.5px}
+.chip:hover{border-color:var(--maroon);color:var(--maroon)}
+
+.hero-art{
+  aspect-ratio:1/1.05;
+  background:var(--stone);
+  position:relative;
+  overflow:hidden;
+  box-shadow:var(--shadow);
+}
+.hero-art svg{width:100%;height:100%;display:block}
+
+/* ---------- value strip ---------- */
+.strip{background:var(--stone-2);color:var(--palm-2);border-top:1px solid var(--gold);border-bottom:1px solid var(--gold)}
+.strip-in{max-width:1180px;margin:auto;display:flex;flex-wrap:wrap;justify-content:space-between;gap:14px;padding:18px clamp(18px,4vw,0px)}
+.value{display:flex;align-items:center;gap:10px;font-size:13px;color:#d9caa1}
+.value b{display:block;color:#fff;font-size:13px}
+.value i{font-style:normal;width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;display:grid;place-items:center;color:var(--gold)}
+
+/* ---------- sections ---------- */
+.section{max-width:1180px;margin:0 auto;padding:58px clamp(18px,4vw,0px)}
+.section-head{display:flex;justify-content:space-between;align-items:end;gap:20px;margin-bottom:26px}
+.section-head h2{font-size:34px;color:var(--stone)}
+.section-head p{font-size:13.5px;color:var(--ink-soft);margin:6px 0 0;max-width:340px}
+.tools{display:flex;gap:8px;flex-wrap:wrap}
+.tools select,.tools input{border:1px solid var(--ink-soft);background:var(--palm-2);padding:9px 12px;font-size:13px;color:var(--ink)}
+
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.leafcard{
+  background:var(--palm-2);
+  border:1px solid var(--line);
+  border-left:5px solid var(--bronze);
+  padding:20px 20px 18px;
+  position:relative;
+  transition:transform .15s;
+}
+.leafcard:hover{transform:translateY(-3px)}
+.leafcard .kicker{font-size:11px;letter-spacing:.5px;color:var(--maroon);font-weight:700;font-family:'Noto Serif Tamil',serif}
+.leafcard h3{font-size:22px;margin:6px 0 6px;color:var(--stone)}
+.leafcard p{font-size:13px;line-height:1.6;color:var(--ink-soft);min-height:40px;margin:0 0 12px}
+.caution-pill{display:inline-flex;align-items:center;gap:6px;background:#f6e3c2;border:1px solid var(--gold);color:#7a5a10;font-size:11px;padding:4px 9px;border-radius:20px;margin-bottom:10px}
+.card-foot{display:flex;justify-content:space-between;align-items:center;border-top:1px dashed var(--line);padding-top:12px;font-size:11.5px;color:var(--ink-soft)}
+.stars{color:var(--gold);letter-spacing:1px}
+.verified{color:var(--leaf);font-weight:700}
+.empty-note{color:var(--ink-soft);font-size:13.5px;padding:20px 0}
+
+/* ---------- knowledge graph ---------- */
+.graph-wrap{background:var(--stone);border:1px solid var(--gold);padding:18px}
+.graph-wrap svg{width:100%;height:auto;display:block}
+.graph-legend{display:flex;gap:22px;margin-top:12px;font-size:12px;color:var(--ink-soft)}
+.graph-legend span{display:inline-flex;align-items:center;gap:7px}
+.dot{width:11px;height:11px;border-radius:50%;display:inline-block}
+
+/* ---------- story ---------- */
+.story{background:var(--maroon);color:#f6ead0}
+.story-in{max-width:1180px;margin:auto;padding:52px clamp(18px,4vw,0px);display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:center}
+.story h2{font-size:32px;max-width:440px;color:#fff}
+.story p{font-size:14px;line-height:1.8;color:#eeddc0;max-width:440px;margin:14px 0 20px}
+.story-art{aspect-ratio:4/3;position:relative;overflow:hidden}
+.story-art svg{width:100%;height:100%}
+
+/* ---------- share ---------- */
+.share{background:var(--stone-2);color:var(--palm-2)}
+.share-in{max-width:1180px;margin:auto;padding:46px clamp(18px,4vw,0px);display:flex;align-items:center;justify-content:space-between;gap:24px;flex-wrap:wrap}
+.share h2{font-size:27px;color:#fff}
+.share p{font-size:13px;color:#d9caa1;margin:6px 0 0;max-width:440px}
+
+/* ---------- shops ---------- */
+.shop-list{display:grid;gap:10px;margin-top:16px}
+.shop-item{border:1px solid var(--line);background:var(--palm-2);padding:13px 15px;display:flex;justify-content:space-between;gap:12px;font-size:13px}
+.shop-item small{display:block;color:var(--ink-soft);margin-top:4px}
+
+/* ---------- footer ---------- */
+.footer{background:var(--stone);color:#c9b789;padding:26px clamp(18px,4vw,0px);display:flex;justify-content:space-between;align-items:center;font-size:11.5px;flex-wrap:wrap;gap:12px}
+.footer .brandname{color:#fff;font-size:16px}
+.footerlinks{display:flex;gap:18px}
+
+/* ---------- modal ---------- */
+.overlay{display:none;position:fixed;inset:0;background:#150f0acc;z-index:40;align-items:center;justify-content:center;padding:20px}
+.overlay.open{display:flex}
+.modal{background:var(--palm-2);width:min(560px,100%);max-height:90vh;overflow:auto;padding:28px 28px 26px;position:relative;border:2px solid var(--stone);box-shadow:8px 8px 0 var(--gold)}
+.modal .close{position:absolute;right:14px;top:12px;border:0;background:none;color:var(--ink-soft);font-size:22px}
+.modal h2{font-size:28px;color:var(--stone);margin-bottom:4px}
+.field{display:block;font-size:12px;color:var(--ink-soft);margin:12px 0 0;font-weight:600}
+.field input,.field textarea,.field select{display:block;width:100%;margin-top:6px;padding:10px 11px;border:1px solid var(--line);background:#fffef8;font-size:13px;color:var(--ink)}
+.field textarea{resize:vertical;min-height:70px}
+.form-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 12px}
+.submit{width:100%;margin-top:16px;border:0;background:var(--maroon);color:#fff;padding:13px;font-size:13px;font-weight:700}
+.submit:hover{background:var(--maroon-l)}
+.fineprint{font-size:11px;color:var(--ink-soft);margin-top:10px;line-height:1.5}
+.detail-safety{border-left:3px solid var(--gold);background:#f6e3c2;padding:11px 13px;font-size:12.5px;line-height:1.6;color:#6a4d0f;margin-top:13px}
+.detail-block{font-size:13px;line-height:1.75;color:var(--ink-soft);margin-top:10px}
+.detail-block b{color:var(--ink)}
+.mic-row{display:flex;align-items:center;gap:10px;margin-top:12px}
+.mic-btn{border:1px solid var(--maroon);background:transparent;color:var(--maroon);border-radius:50%;width:44px;height:44px;font-size:18px}
+.mic-btn.recording{background:var(--maroon);color:#fff;animation:pulse 1.1s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #71202b55}70%{box-shadow:0 0 0 10px #71202b00}100%{box-shadow:0 0 0 0 #71202b00}}
+.mic-hint{font-size:11.5px;color:var(--ink-soft)}
+.rate{display:flex;gap:4px;font-size:24px;color:var(--gold);margin:8px 0}
+.rate button{border:0;background:none;color:inherit;opacity:.4}
+.rate button.active{opacity:1}
+.review-item{border-top:1px solid var(--line);padding-top:10px;margin-top:10px;font-size:12.5px}
+.review-item b{color:var(--ink)}
+.toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(80px);opacity:0;background:var(--stone);color:#fff;padding:12px 20px;border:1px solid var(--gold);font-size:13px;transition:.25s;z-index:60}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.offline-banner{display:none;background:#7a1f1f;color:#fdeee0;text-align:center;font-size:13px;padding:10px 16px}
+.offline-banner.show{display:block}
+.offline-banner code{background:#00000030;padding:2px 6px;border-radius:3px}
+.auth-modes{display:grid;grid-template-columns:1fr 1fr;border:1px solid var(--line);margin:16px 0 10px}
+.auth-modes button{border:0;background:transparent;color:var(--ink-soft);padding:9px;font-size:13px}
+.auth-modes button.active{background:var(--stone);color:var(--palm-2)}
+.account-wrap{position:relative}
+.avatar{width:42px;height:42px;display:grid;place-items:center;border:1px solid var(--gold);border-radius:50%;background:var(--maroon);color:#fff}
+.avatar svg{width:21px;height:21px}
+.account-menu{position:absolute;z-index:30;right:0;top:calc(100% + 12px);width:230px;padding:14px;background:var(--stone);border:1px solid var(--gold);box-shadow:var(--shadow);color:var(--palm-2)}
+.account-menu strong,.account-menu small{display:block;overflow-wrap:anywhere}
+.account-menu small{color:#d9caa1;margin-top:3px}
+.account-menu button{margin-top:12px;width:100%;text-align:left}
+.voice-language{max-width:220px}
+[hidden]{display:none!important}
+
+@media(max-width:900px){
+  .hero{grid-template-columns:1fr;padding-top:36px}
+  .grid{grid-template-columns:1fr}
+  .story-in{grid-template-columns:1fr}
+  .navlinks{display:none}
+  .form-grid{grid-template-columns:1fr}
+}
+</style>
+</head>
+<body>
+
+<div class="offline-banner" id="offlineBanner">Can't reach the backend yet — start it with <code>python app.py</code> from the project folder, then open <code>http://127.0.0.1:5050</code>.</div>
+<div class="threadline"></div>
+
+<header class="nav">
+  <a href="#home" class="brand">
+    <svg class="brandmark" viewBox="0 0 48 48"><path d="M24 3 L30 16 L44 16 L33 25 L37 40 L24 31 L11 40 L15 25 L4 16 L18 16 Z" fill="#c9a227"/><circle cx="24" cy="21" r="7" fill="#711f2b" stroke="#1d1712" stroke-width="1"/></svg>
+    <span class="brandname">Paatti Vaithiyam<small class="tamil">வழிவழி வைத்தியம்</small></span>
+  </a>
+  <nav class="navlinks">
+    <a href="#home" class="active">Home</a>
+    <a href="#remedies">Remedies</a>
+    <a href="#graph">Knowledge web</a>
+    <a href="#story">Our story</a>
+    <a href="#shops">Nattu marunthu kadai</a>
+  </nav>
+  <div class="nav-actions">
+    <button class="btn" onclick="openShareModal()">Share a remedy</button>
+    <div class="account-wrap" id="accountWrap" hidden>
+      <button class="avatar" id="accountAvatar" type="button" aria-label="Open account menu" aria-expanded="false" onclick="toggleAccountMenu()">
+        <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="4" fill="currentColor"/><path d="M4 21c.4-4.1 3.3-6.5 8-6.5s7.6 2.4 8 6.5" fill="currentColor"/></svg>
+      </button>
+      <div class="account-menu" id="accountMenu" hidden>
+        <strong id="accountDisplayName"></strong>
+        <small id="accountDisplayEmail"></small>
+        <button class="btn" type="button" onclick="logout()">Sign out</button>
+      </div>
+    </div>
+    <button class="btn solid" id="signInButton" onclick="openAuthModal('login')">Sign in</button>
+  </div>
+</header>
+
+<main id="home">
+  <section class="hero">
+    <div>
+      <div class="eyebrow tamil">பாட்டி சொன்ன மருந்து</div>
+      <h1>Wisdom spoken by<br><em>grandmothers,</em><br>kept for grandchildren.</h1>
+      <p>Every remedy here was first spoken aloud — by a paatti, a thatha, a village healer — then written down and connected to the herbs and care practices families remember.</p>
+      <div class="search-wrap">
+        <form class="search" id="searchform">
+          <input id="search" autocomplete="off" placeholder="Search a symptom, herb, or village — try 'cough' or 'neem'">
+          <button type="submit">Find a remedy</button>
+        </form>
+        <div id="suggestions" class="suggestions"></div>
+      </div>
+      <div class="chips" id="chipRow"></div>
+    </div>
+    <div class="hero-art">
+      <svg viewBox="0 0 420 440" preserveAspectRatio="xMidYMid slice">
+        <rect width="420" height="440" fill="#1d1712"/>
+        <path d="M0 330 Q105 260 210 330 T420 330 V440 H0 Z" fill="#2a221a"/>
+        <path d="M60 330 C 60 230 90 170 90 110 C 90 170 120 230 120 330 Z" fill="#33472e" opacity=".85"/>
+        <path d="M150 330 C 150 210 190 150 190 90 C 190 150 230 210 230 330 Z" fill="#3c5436" opacity=".9"/>
+        <path d="M260 330 C 260 240 295 190 295 130 C 295 190 330 240 330 330 Z" fill="#33472e" opacity=".85"/>
+        <circle cx="210" cy="150" r="46" fill="#c9a227" opacity=".9"/>
+        <circle cx="210" cy="150" r="46" fill="none" stroke="#1d1712" stroke-width="2"/>
+        <path d="M195 150 q15 -22 30 0 q-15 22 -30 0 Z" fill="#711f2b"/>
+        <g stroke="#c9a227" stroke-width="1.4" opacity=".55">
+          <path d="M20 40 h380 M20 60 h380 M20 400 h380"/>
+        </g>
+        <text x="210" y="420" text-anchor="middle" fill="#e7d9a9" font-family="Noto Serif Tamil, serif" font-size="18">தலைமுறை தலைமுறையாக</text>
+      </svg>
+    </div>
+  </section>
+
+  <div class="strip"><div class="strip-in">
+    <div class="value"><i>&#10082;</i><span><b>Told by elders</b>not written texts alone</span></div>
+    <div class="value"><i>&#9776;</i><span><b>Mapped as a web</b>of symptom, herb, and care</span></div>
+    <div class="value"><i>&#10003;</i><span><b>Review status shown</b>before sharing</span></div>
+    <div class="value"><i>&#8962;</i><span><b>Local shops</b>near where you live</span></div>
+  </div></div>
+
+  <section class="section" id="remedies">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow tamil">குடும்பக் குறிப்பேடு</div>
+        <h2>From the family notebook</h2>
+        <p>Search what your family has always known, cross-checked and ready to browse.</p>
+      </div>
+      <div class="tools">
+        <select id="categoryFilter"><option value="">All categories</option></select>
+      </div>
+    </div>
+    <div class="grid" id="cards"><div class="empty-note">Loading remedies…</div></div>
+  </section>
+
+  <section class="section" id="graph">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow tamil">அறிவு வலை</div>
+        <h2>The knowledge web</h2>
+        <p>What treats what — drawn as a living map instead of a page you scroll past.</p>
+      </div>
+    </div>
+    <div class="graph-wrap"><svg id="graphSvg" viewBox="0 0 1000 460"></svg></div>
+    <div class="graph-legend">
+      <span><i class="dot" style="background:#c9a227"></i>Symptom</span>
+      <span><i class="dot" style="background:#7fae74"></i>Herb</span>
+      <span><i class="dot" style="background:#8f2c3a"></i>Connection with a caution on file</span>
+    </div>
+  </section>
+
+  <section class="story" id="story">
+    <div class="story-in">
+      <div>
+        <div class="eyebrow tamil" style="color:#e6c789">தலைமுறை தலைமுறையாக</div>
+        <h2>Every remedy starts with someone who remembers.</h2>
+        <p>We are gathering everyday knowledge passed from paatti to paethi, and appa to pillai. New contributions stay private until they are reviewed. Nothing here replaces a doctor or establishes that a remedy is clinically effective.</p>
+        <a href="#remedies" class="btn solid" style="display:inline-block">Browse the notebook</a>
+      </div>
+      <div class="story-art">
+        <svg viewBox="0 0 400 300"><rect width="400" height="300" fill="#5c1620"/>
+          <g stroke="#eeddc0" stroke-width="1" opacity=".5">
+            <line x1="0" y1="40" x2="400" y2="40"/><line x1="0" y1="260" x2="400" y2="260"/>
+          </g>
+          <circle cx="120" cy="150" r="58" fill="#c9a227" opacity=".85"/>
+          <circle cx="260" cy="150" r="40" fill="#33472e" opacity=".9"/>
+          <path d="M120 150 L260 150" stroke="#eeddc0" stroke-width="2" stroke-dasharray="4 5"/>
+          <text x="200" y="285" text-anchor="middle" fill="#eeddc0" font-family="Noto Serif Tamil, serif" font-size="15">பாட்டி &#8594; பேத்தி</text>
+        </svg>
+      </div>
+    </div>
+  </section>
+
+  <section class="share">
+    <div class="share-in">
+      <div>
+        <div class="eyebrow tamil" style="color:#e6c789">உங்கள் அறிவைப் பகிரவும்</div>
+        <h2>Know a remedy your family still uses?</h2>
+        <p>Speak it or type it. Your contribution stays private while pending review; rule-based cautions are not clinical verification.</p>
+      </div>
+      <button class="btn solid" onclick="openShareModal()">Share a remedy</button>
+    </div>
+  </section>
+
+  <section class="section" id="shops">
+    <div class="section-head">
+      <div>
+        <div class="eyebrow tamil">நாட்டு மருந்து கடை</div>
+        <h2>Find a Nattu Marunthu Kadai</h2>
+        <p>Traditional herbal shops near you, and the people who keep them stocked.</p>
+      </div>
+      <button class="btn" onclick="openModal('shopsmodal')">Explore nearby shops</button>
+    </div>
+    <div id="shopPreview" class="shop-list"></div>
+  </section>
+</main>
+
+<footer class="footer">
+  <a class="brand" href="#home">
+    <svg class="brandmark" viewBox="0 0 48 48" width="30" height="30"><path d="M24 3 L30 16 L44 16 L33 25 L37 40 L24 31 L11 40 L15 25 L4 16 L18 16 Z" fill="#c9a227"/></svg>
+    <span class="brandname">Paatti Vaithiyam</span>
+  </a>
+  <span>Made with care, for the knowledge our elders carry.</span>
+  <div class="footerlinks">
+    <a href="#story">Our story</a><a href="#remedies">Remedies</a><a href="#shops">Local shops</a>
+  </div>
+</footer>
+
+<!-- Remedy detail modal -->
+<div class="overlay" id="remedydetail" onclick="if(event.target===this)closeModal('remedydetail')">
+  <div class="modal">
+    <button class="close" onclick="closeModal('remedydetail')">&times;</button>
+    <div class="eyebrow tamil" id="detailKicker">குடும்பக் குறிப்பு</div>
+    <h2 id="detailTitle">—</h2>
+    <p class="fineprint" id="detailSource">—</p>
+    <div id="detailCaution"></div>
+    <div class="detail-block"><b>What families remember</b><br><span id="detailPrep"></span></div>
+    <div class="detail-block"><b>Who it's for</b> — <span id="detailWho"></span><br><b>How much</b> — <span id="detailDosage"></span></div>
+    <div id="detailSafety"></div>
+    <div style="margin-top:18px;display:flex;gap:10px;align-items:center">
+      <button class="btn" onclick="verifyCurrent()">Confirm this remedy</button>
+      <span id="verifiedCount" style="font-size:12px;color:var(--ink-soft)"></span>
+    </div>
+    <div style="margin-top:18px;border-top:1px solid var(--line);padding-top:14px">
+      <b style="font-family:'Cormorant Garamond',serif;font-size:19px">Leave a note</b>
+      <div class="fineprint" id="reviewLoginNotice">Sign in to leave a comment. Existing notes remain visible.
+        <button class="btn" type="button" onclick="openAuthModal('login')">Sign in</button>
+      </div>
+      <div id="reviewComposer" hidden>
+        <div class="fineprint" id="reviewAccountName"></div>
+        <div class="rate" id="rateStars"><button data-v="1">&#9733;</button><button data-v="2">&#9733;</button><button data-v="3">&#9733;</button><button data-v="4">&#9733;</button><button data-v="5">&#9733;</button></div>
+        <textarea id="reviewComment" placeholder="What would you like to share?"></textarea>
+        <button class="submit" onclick="postReview()">Share your note</button>
+      </div>
+      <div id="reviewList"></div>
+    </div>
+  </div>
+</div>
+
+<!-- Share a remedy modal -->
+<div class="overlay" id="share" onclick="if(event.target===this)closeModal('share')">
+  <div class="modal">
+    <button class="close" onclick="closeModal('share')">&times;</button>
+    <div class="eyebrow tamil">உங்கள் அறிவைப் பகிரவும்</div>
+    <h2>Pass on what you know</h2>
+    <p class="fineprint">Speak into your microphone or type it out. Speech is transcribed by your browser. Non-English transcript text is sent to MyMemory for English translation.</p>
+    <div class="mic-row">
+      <button class="mic-btn" id="micBtn" onclick="toggleRecording()">&#127908;</button>
+      <span class="mic-hint" id="micHint">Tap to start speech recognition.</span>
+    </div>
+    <label class="field voice-language">Spoken language
+      <select id="voiceLanguage">
+        <option value="ta-IN">Tamil</option>
+        <option value="en-IN">English</option>
+        <option value="hi-IN">Hindi</option>
+        <option value="ml-IN">Malayalam</option>
+      </select>
+    </label>
+    <label class="field">What you said (edit as needed)
+      <textarea id="rawText" placeholder="e.g. For a child's cough, we use tulsi leaves boiled with pepper and honey."></textarea>
+    </label>
+    <div class="form-grid">
+      <label class="field">Your name (as the source)<input id="elderName" placeholder="e.g. Meenakshi Paatti"></label>
+      <label class="field">Village / town<input id="elderVillage" placeholder="e.g. Melur"></label>
+    </div>
+    <label class="field">Who is it for? (optional — helps our safety check)<input id="whoFor" placeholder="e.g. children, adults, avoid in pregnancy"></label>
+    <button class="submit" onclick="submitRemedy()">Add to the notebook</button>
+    <div class="fineprint">New entries are private until an authorized reviewer approves them against an appropriate, cited source. A dataset match alone is not medical advice.</div>
+  </div>
+</div>
+
+<!-- Account modal -->
+<div class="overlay" id="login" onclick="if(event.target===this)closeModal('login')">
+  <div class="modal">
+    <button class="close" onclick="closeModal('login')">&times;</button>
+    <div class="eyebrow tamil">வணக்கம்</div>
+    <h2 id="authTitle">Sign in</h2>
+    <p class="fineprint">Create an account to share remedies. Your password is stored as a secure hash.</p>
+    <div class="auth-modes" role="tablist" aria-label="Account access">
+      <button type="button" id="loginModeButton" class="active" onclick="setAuthMode('login')">Sign in</button>
+      <button type="button" id="registerModeButton" onclick="setAuthMode('register')">Create account</button>
+    </div>
+    <form id="authForm">
+      <div id="registerFields" hidden>
+        <label class="field">Your name<input id="accountNameInput" autocomplete="name" required></label>
+        <label class="field">Phone number<input id="accountPhoneInput" type="tel" autocomplete="tel" required></label>
+        <label class="field">Location<input id="accountLocationInput" autocomplete="address-level2" required></label>
+      </div>
+      <label class="field">Email<input id="accountEmailInput" type="email" autocomplete="email" required></label>
+      <label class="field">Password<input id="accountPasswordInput" type="password" autocomplete="current-password" minlength="8" required></label>
+      <button class="submit" id="authSubmitButton">Sign in</button>
+      <p class="fineprint" id="authError" role="alert"></p>
+      <p class="fineprint">Set <code>FLASK_SECRET_KEY</code> and use HTTPS for a deployed service.</p>
+    </form>
+  </div>
+</div>
+
+<!-- Shops modal -->
+<div class="overlay" id="shopsmodal" onclick="if(event.target===this)closeModal('shopsmodal')">
+  <div class="modal">
+    <button class="close" onclick="closeModal('shopsmodal')">&times;</button>
+    <div class="eyebrow tamil">நாட்டு மருந்து கடை</div>
+    <h2>Herbal shops near you</h2>
+    <label class="field">Town<input id="town" placeholder="Enter your town"></label>
+    <button class="submit" onclick="findShops()">Find shops</button>
+    <div id="shopresults" class="shop-list" style="margin-top:12px"></div>
+  </div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+const API = "/api";
+let currentRemedyId = null;
+let currentRating = 0;
+let speechRecognition = null;
+let recording = false;
+let currentUser = null;
+let authMode = 'login';
+let shareAfterLogin = false;
+let sessionReady = false;
+let sessionPromise = null;
+
+function toast(msg){
+  const el = document.querySelector('#toast');
+  el.textContent = msg;
+  el.classList.add('show');
+  setTimeout(()=>el.classList.remove('show'), 2600);
+}
+function openModal(id){ document.getElementById(id)?.classList.add('open'); }
+function closeModal(id){ document.getElementById(id)?.classList.remove('open'); }
+
+function setAuthMode(mode){
+  authMode = mode;
+  const registering = mode === 'register';
+  document.getElementById('registerFields').hidden = !registering;
+  document.querySelectorAll('#registerFields input').forEach(input=>input.required = registering);
+  document.getElementById('accountPasswordInput').autocomplete = registering ? 'new-password' : 'current-password';
+  document.getElementById('authTitle').textContent = registering ? 'Create your account' : 'Sign in';
+  document.getElementById('authSubmitButton').textContent = registering ? 'Create account' : 'Sign in';
+  document.getElementById('loginModeButton').classList.toggle('active', !registering);
+  document.getElementById('registerModeButton').classList.toggle('active', registering);
+  document.getElementById('authError').textContent = '';
+}
+function openAuthModal(mode='login'){
+  setAuthMode(mode);
+  openModal('login');
+}
+async function openShareModal(){
+  await checkSession();
+  if(!currentUser){
+    shareAfterLogin = true;
+    openAuthModal('register');
+    return;
+  }
+  document.getElementById('elderName').value = currentUser.name;
+  document.getElementById('elderVillage').value = currentUser.location;
+  openModal('share');
+}
+function updateAccountUI(){
+  const signedIn = Boolean(currentUser);
+  document.getElementById('accountWrap').hidden = !signedIn;
+  document.getElementById('signInButton').hidden = signedIn;
+  document.getElementById('accountDisplayName').textContent = signedIn ? currentUser.name : '';
+  document.getElementById('accountDisplayEmail').textContent = signedIn ? currentUser.email : '';
+  document.getElementById('accountAvatar').setAttribute('aria-label', signedIn ? `Open account menu for ${currentUser.name}` : 'Open account menu');
+  document.getElementById('reviewLoginNotice').hidden = signedIn;
+  document.getElementById('reviewComposer').hidden = !signedIn;
+  document.getElementById('reviewAccountName').textContent = signedIn ? `Commenting as ${currentUser.name}` : '';
+  if(!signedIn) toggleAccountMenu(false);
+}
+function toggleAccountMenu(forceOpen){
+  const menu = document.getElementById('accountMenu');
+  const shouldOpen = forceOpen ?? menu.hidden;
+  menu.hidden = !shouldOpen;
+  document.getElementById('accountAvatar').setAttribute('aria-expanded', String(shouldOpen));
+}
+async function checkSession(){
+  if(sessionReady) return;
+  if(!sessionPromise){
+    sessionPromise = (async()=>{
+      try{
+        const result = await apiGet('/auth/me');
+        currentUser = result.authenticated ? result.user : null;
+        updateAccountUI();
+      }catch(e){}
+      finally{ sessionReady = true; }
+    })();
+  }
+  await sessionPromise;
+}
+async function logout(){
+  try{
+    await apiPost('/auth/logout', {});
+    currentUser = null;
+    updateAccountUI();
+    toast('You have signed out.');
+  }catch(e){ toast(e.message); }
+}
+document.addEventListener('click', event=>{
+  if(!document.getElementById('accountWrap').contains(event.target)) toggleAccountMenu(false);
+});
+document.getElementById('authForm').addEventListener('submit', async event=>{
+  event.preventDefault();
+  const payload = {
+    email: document.getElementById('accountEmailInput').value.trim(),
+    password: document.getElementById('accountPasswordInput').value
+  };
+  if(authMode === 'register'){
+    payload.name = document.getElementById('accountNameInput').value.trim();
+    payload.phone = document.getElementById('accountPhoneInput').value.trim();
+    payload.location = document.getElementById('accountLocationInput').value.trim();
+  }
+  try{
+    const result = await apiPost(authMode === 'register' ? '/auth/register' : '/auth/login', payload);
+    currentUser = result.user;
+    updateAccountUI();
+    closeModal('login');
+    document.getElementById('accountPasswordInput').value = '';
+    toast(authMode === 'register' ? 'Your account is ready.' : 'Welcome back.');
+    if(shareAfterLogin){
+      shareAfterLogin = false;
+      openShareModal();
+    }
+  }catch(error){
+    document.getElementById('authError').textContent = error.message;
+  }
+});
+
+async function apiGet(path){
+  const res = await fetch(API + path);
+  if(!res.ok) throw new Error('request failed');
+  return res.json();
+}
+async function apiPost(path, body){
+  const res = await fetch(API + path, {method:'POST', headers:{'Content-Type':'application/json'}, body: JSON.stringify(body)});
+  const data = await res.json();
+  if(!res.ok) throw new Error(data.error || 'request failed');
+  return data;
+}
+
+function showOffline(show){
+  document.getElementById('offlineBanner').classList.toggle('show', show);
+}
+function escapeHTML(value){
+  return String(value ?? '').replace(/[&<>"']/g, character => ({
+    '&':'&amp;', '<':'&lt;', '>':'&gt;', '"':'&quot;', "'":'&#39;'
+  })[character]);
+}
+
+// ---------------- remedies list ----------------
+let allRemedies = [];
+
+function renderCards(list){
+  const wrap = document.getElementById('cards');
+  if(!list.length){
+    wrap.innerHTML = '<div class="empty-note">No remedy notes found. Try “cough”, “neem”, or “hair”.</div>';
+    return;
+  }
+  wrap.innerHTML = list.map(r => `
+    <article class="leafcard" tabindex="0" role="button" data-remedy-id="${r.id}">
+      <div class="kicker">${escapeHTML((r.herbs || []).slice(0,2).join(' · '))}</div>
+      <h3>${escapeHTML(r.title)}</h3>
+      ${r.safety_flag ? `<div class="caution-pill">&#9888; caution on file</div>` : ''}
+      <p>${escapeHTML((r.preparation || '').length > 90 ? r.preparation.slice(0,90) + '…' : r.preparation || '')}</p>
+      <div class="card-foot">
+        <span>${r.rating_avg ? `<span class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</span> ${r.rating_avg} (${r.rating_count})` : 'No notes yet'}</span>
+        <span class="${r.verified > 5 ? 'verified' : ''}">${escapeHTML(r.verified)} confirmed</span>
+      </div>
+    </article>
+  `).join('');
+  wrap.querySelectorAll('[data-remedy-id]').forEach(card=>{
+    card.addEventListener('click', ()=>openDetail(Number(card.dataset.remedyId)));
+    card.addEventListener('keydown', event=>{
+      if(event.key === 'Enter' || event.key === ' '){ event.preventDefault(); card.click(); }
+    });
+  });
+}
+
+async function loadRemedies(q=''){
+  try{
+    const cat = document.getElementById('categoryFilter').value;
+    const params = new URLSearchParams();
+    if(q) params.set('q', q);
+    if(cat) params.set('category', cat);
+    allRemedies = await apiGet('/remedies' + (params.toString() ? '?' + params.toString() : ''));
+    renderCards(allRemedies);
+    showOffline(false);
+  }catch(e){
+    showOffline(true);
+    document.getElementById('cards').innerHTML = '<div class="empty-note">Couldn\'t load remedies — is the backend running?</div>';
+  }
+}
+
+async function loadCategories(){
+  try{
+    const list = await apiGet('/remedies');
+    const cats = [...new Set(list.map(r=>r.category))].sort();
+    const sel = document.getElementById('categoryFilter');
+    cats.forEach(c=>{
+      const opt = document.createElement('option');
+      opt.value = c; opt.textContent = c;
+      sel.appendChild(opt);
+    });
+  }catch(e){}
+}
+document.getElementById('categoryFilter').addEventListener('change', ()=>loadRemedies(document.getElementById('search').value));
+
+// ---------------- search + chips ----------------
+const searchInput = document.getElementById('search');
+const suggestions = document.getElementById('suggestions');
+
+searchInput.addEventListener('input', async ()=>{
+  const q = searchInput.value.trim();
+  if(!q){ suggestions.classList.remove('show'); return; }
+  try{
+    const matches = await apiGet('/remedies?q=' + encodeURIComponent(q));
+    suggestions.innerHTML = matches.slice(0,6).map(r => `<div class="suggestion" data-remedy-id="${r.id}">&#9887; ${escapeHTML(r.title)}</div>`).join('');
+    suggestions.querySelectorAll('[data-remedy-id]').forEach(item=>{
+      item.addEventListener('click', ()=>{
+        const remedy = matches.find(match=>match.id === Number(item.dataset.remedyId));
+        if(remedy) pickSuggestion(remedy.id, remedy.title);
+      });
+    });
+    suggestions.classList.toggle('show', matches.length > 0);
+  }catch(e){}
+});
+function pickSuggestion(id, title){
+  suggestions.classList.remove('show');
+  searchInput.value = title;
+  loadRemedies(title);
+  document.getElementById('remedies').scrollIntoView({behavior:'smooth'});
+}
+document.getElementById('searchform').addEventListener('submit', e=>{
+  e.preventDefault();
+  suggestions.classList.remove('show');
+  loadRemedies(searchInput.value);
+  document.getElementById('remedies').scrollIntoView({behavior:'smooth'});
+});
+
+async function loadChips(){
+  try{
+    const symptoms = await apiGet('/symptoms');
+    const row = document.getElementById('chipRow');
+    row.replaceChildren(document.createTextNode('A few paths in '));
+    symptoms.slice(0,5).forEach(symptom=>{
+      const button = document.createElement('button');
+      button.type = 'button';
+      button.className = 'chip';
+      button.textContent = symptom;
+      button.addEventListener('click', ()=>{
+        searchInput.value = symptom;
+        loadRemedies(symptom);
+        document.getElementById('remedies').scrollIntoView({behavior:'smooth'});
+      });
+      row.append(button);
+    });
+  }catch(e){}
+}
+
+// ---------------- detail modal ----------------
+async function openDetail(id){
+  try{
+    await checkSession();
+    const r = await apiGet('/remedies/' + id);
+    currentRemedyId = id;
+    currentRating = 0;
+    document.getElementById('detailKicker').textContent = r.title_ta || 'குடும்பக் குறிப்பு';
+    document.getElementById('detailTitle').textContent = r.title;
+    document.getElementById('detailSource').textContent = `As told by ${r.elder_name}, ${r.village}`;
+    document.getElementById('detailPrep').textContent = r.preparation;
+    document.getElementById('detailWho').textContent = r.who_for || 'not specified';
+    document.getElementById('detailDosage').textContent = r.dosage || 'not specified';
+    document.getElementById('detailCaution').innerHTML = r.safety_flag ? `<div class="caution-pill" style="margin-top:8px">&#9888; This remedy has a safety note below</div>` : '';
+    document.getElementById('detailSafety').innerHTML = r.safety_flag ? `<div class="detail-safety"><b>A gentle reminder</b><br>${escapeHTML(r.safety_note)}<br><br>This is shared tradition, not a proven treatment. For children, pregnancy, ongoing medication, or a worsening condition, please ask a qualified clinician.</div>` : `<div class="detail-safety" style="border-color:#33472e;background:#e6ecdf;color:#2a3a26"><b>No known caution on file</b><br>No interaction was flagged for the herbs listed here, but this is still shared tradition, not a proven treatment.</div>`;
+    document.getElementById('verifiedCount').textContent = `${r.verified} people have confirmed this remedy`;
+    document.querySelectorAll('#rateStars button').forEach(b=>b.classList.remove('active'));
+    renderReviews(r.reviews);
+    openModal('remedydetail');
+  }catch(e){
+    toast("Couldn't load that remedy — check the backend is running.");
+  }
+}
+function renderReviews(reviews){
+  const wrap = document.getElementById('reviewList');
+  if(!reviews.length){ wrap.innerHTML = '<div class="fineprint">No notes yet — be the first to share one.</div>'; return; }
+  wrap.innerHTML = reviews.map(rv => `<div class="review-item"><b>${escapeHTML(rv.author || 'A visitor')}</b> — ${'★'.repeat(rv.rating)}${'☆'.repeat(5-rv.rating)}<br>${escapeHTML(rv.comment || '')}</div>`).join('');
+}
+document.querySelectorAll('#rateStars button').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    currentRating = parseInt(btn.dataset.v);
+    document.querySelectorAll('#rateStars button').forEach(b=>b.classList.toggle('active', parseInt(b.dataset.v) <= currentRating));
+  });
+});
+async function postReview(){
+  if(!currentRemedyId) return;
+  if(!currentRating){ toast('Pick a star rating first.'); return; }
+  try{
+    const r = await apiPost(`/remedies/${currentRemedyId}/reviews`, {
+      rating: currentRating,
+      comment: document.getElementById('reviewComment').value.trim()
+    });
+    renderReviews(r.reviews);
+    document.getElementById('reviewComment').value = '';
+    toast('Your note has been shared.');
+    loadRemedies(searchInput.value);
+  }catch(e){ toast("Couldn't save your note — check the backend."); }
+}
+async function verifyCurrent(){
+  if(!currentRemedyId) return;
+  try{
+    const r = await apiPost(`/remedies/${currentRemedyId}/verify`, {});
+    document.getElementById('verifiedCount').textContent = `${r.verified} people have confirmed this remedy`;
+    toast('Thank you for confirming this remedy.');
+    loadRemedies(searchInput.value);
+  }catch(e){ toast("Couldn't reach the backend."); }
+}
+
+// ---------------- share a remedy + speech transcription ----------------
+async function translateToEnglish(transcript, sourceLanguage){
+  const sourceCode = sourceLanguage.split('-')[0];
+  const params = new URLSearchParams({q: transcript, langpair: `${sourceCode}|en`});
+  const response = await fetch(`https://api.mymemory.translated.net/get?${params}`);
+  if(!response.ok) throw new Error('Translation service is unavailable.');
+  const result = await response.json();
+  const translated = result.responseData?.translatedText;
+  if(!translated || result.responseStatus !== 200) throw new Error('Could not translate this transcript.');
+  return translated;
+}
+
+async function toggleRecording(){
+  const btn = document.getElementById('micBtn');
+  const hint = document.getElementById('micHint');
+  const Recognition = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if(!recording){
+    if(!Recognition){
+      hint.textContent = 'Speech recognition is not supported in this browser. Type the remedy instead.';
+      return;
+    }
+    speechRecognition = new Recognition();
+    speechRecognition.lang = document.getElementById('voiceLanguage').value;
+    speechRecognition.interimResults = false;
+    speechRecognition.maxAlternatives = 1;
+    speechRecognition.onstart = ()=>{
+      recording = true;
+      btn.classList.add('recording');
+      hint.textContent = 'Listening… tap again to stop.';
+    };
+    speechRecognition.onresult = async event=>{
+      const transcript = event.results[0][0].transcript.trim();
+      const language = document.getElementById('voiceLanguage').value;
+      const input = document.getElementById('rawText');
+      input.value = transcript;
+      if(!transcript || language.startsWith('en')){
+        hint.textContent = transcript ? 'English transcription ready. Review it before submitting.' : 'No speech was detected. Try again or type the remedy.';
+        return;
+      }
+      hint.textContent = 'Translating transcript into English…';
+      try{
+        input.value = await translateToEnglish(transcript, language);
+        hint.textContent = 'English translation ready. Review it before submitting.';
+      }catch(error){
+        hint.textContent = `${error.message} The original transcript is still available to edit.`;
+      }
+    };
+    speechRecognition.onerror = event=>{
+      hint.textContent = event.error === 'not-allowed'
+        ? 'Microphone permission was denied. Type the remedy instead.'
+        : `Speech recognition failed (${event.error}). Try again or type the remedy.`;
+    };
+    speechRecognition.onend = ()=>{
+      recording = false;
+      btn.classList.remove('recording');
+      if(hint.textContent === 'Listening… tap again to stop.') hint.textContent = 'No speech was detected. Try again or type the remedy.';
+    };
+    try{
+      speechRecognition.start();
+    }catch(error){
+      recording = false;
+      btn.classList.remove('recording');
+      hint.textContent = 'Could not start speech recognition. Try again or type the remedy.';
+    }
+  }else{
+    speechRecognition?.stop();
+  }
+}
+
+async function submitRemedy(){
+  const raw_text = document.getElementById('rawText').value.trim();
+  const elder_name = document.getElementById('elderName').value.trim();
+  const village = document.getElementById('elderVillage').value.trim();
+  const who_for = document.getElementById('whoFor').value.trim();
+  if(!raw_text){ toast('Tell us the remedy first, spoken or typed.'); return; }
+  try{
+    const r = await apiPost('/remedies', {raw_text, elder_name, village, who_for});
+    closeModal('share');
+    toast('Submitted privately. It will appear for everyone after authorized review.');
+    document.getElementById('rawText').value = '';
+    document.getElementById('elderName').value = '';
+    document.getElementById('elderVillage').value = '';
+    document.getElementById('whoFor').value = '';
+    loadRemedies();
+    loadGraph();
+    loadChips();
+  }catch(e){ toast("Couldn't save — check the backend is running."); }
+}
+
+// ---------------- knowledge graph ----------------
+async function loadGraph(){
+  const svg = document.getElementById('graphSvg');
+  try{
+    const {nodes, edges} = await apiGet('/graph');
+    const symptomNodes = nodes.filter(n=>n.type==='symptom');
+    const herbNodes = nodes.filter(n=>n.type==='herb');
+    const W = 1000, H = 460, padY = 50;
+    const sx = 230, hx = 760;
+    const posOf = {};
+    symptomNodes.forEach((n,i)=>{
+      const y = symptomNodes.length>1 ? padY + i*((H-2*padY)/(symptomNodes.length-1)) : H/2;
+      posOf[n.id] = {x:sx, y};
+    });
+    herbNodes.forEach((n,i)=>{
+      const y = herbNodes.length>1 ? padY + i*((H-2*padY)/(herbNodes.length-1)) : H/2;
+      posOf[n.id] = {x:hx, y};
+    });
+    let svgContent = '';
+    edges.forEach(e=>{
+      const a = posOf[e.source], b = posOf[e.target];
+      if(!a || !b) return;
+      svgContent += `<path d="M${a.x},${a.y} C${(a.x+b.x)/2},${a.y} ${(a.x+b.x)/2},${b.y} ${b.x},${b.y}" fill="none" stroke="${e.caution ? '#8f2c3a' : '#7fae7466'}" stroke-width="${e.caution?1.6:1}" />`;
+    });
+    symptomNodes.forEach(n=>{
+      const p = posOf[n.id];
+      svgContent += `<circle cx="${p.x}" cy="${p.y}" r="9" fill="#c9a227" stroke="#1d1712" stroke-width="1"/>`;
+      svgContent += `<text x="${p.x-16}" y="${p.y+4}" text-anchor="end" fill="#f1e6c4" font-size="13" font-family="Catamaran">${escapeHTML(n.label)}</text>`;
+    });
+    herbNodes.forEach(n=>{
+      const p = posOf[n.id];
+      svgContent += `<circle cx="${p.x}" cy="${p.y}" r="7" fill="#7fae74" stroke="#1d1712" stroke-width="1"/>`;
+      svgContent += `<text x="${p.x+15}" y="${p.y+4}" text-anchor="start" fill="#f1e6c4" font-size="12.5" font-family="Catamaran">${escapeHTML(n.label)}</text>`;
+    });
+    svg.setAttribute('viewBox', `0 0 ${W} ${H}`);
+    svg.innerHTML = svgContent;
+    showOffline(false);
+  }catch(e){
+    svg.innerHTML = `<text x="500" y="230" text-anchor="middle" fill="#e7d9a9" font-size="15">Knowledge web will appear once the backend is running.</text>`;
+    showOffline(true);
+  }
+}
+
+// ---------------- shops ----------------
+function renderShops(list, target){
+  target.innerHTML = list.map(s => `
+    <div class="shop-item">
+      <div>
+        <b>${escapeHTML(s.name)}</b>
+        <small>${escapeHTML(s.address || '')}</small>
+      </div>
+      <div style="text-align:right">
+        <div>${escapeHTML(s.phone || '')}</div>
+        <small>${escapeHTML(s.hours || '')}</small>
+      </div>
+    </div>
+  `).join('') || '<div class="fineprint">No shops found for that town yet.</div>';
+}
+async function loadShopPreview(){
+  try{
+    const list = await apiGet('/shops');
+    renderShops(list.slice(0,2), document.getElementById('shopPreview'));
+  }catch(e){}
+}
+async function findShops(){
+  const town = document.getElementById('town').value.trim();
+  try{
+    const list = await apiGet('/shops' + (town ? '?town=' + encodeURIComponent(town) : ''));
+    renderShops(list, document.getElementById('shopresults'));
+  }catch(e){ toast("Couldn't reach the backend."); }
+}
+
+// ---------------- boot ----------------
+const navigationLinks = [...document.querySelectorAll('.navlinks a')];
+const navigationTargets = navigationLinks
+  .map(link=>document.querySelector(link.getAttribute('href')))
+  .filter(target=>target && target.id !== 'home');
+
+function updateActiveNavigation(){
+  const activationPoint = window.scrollY + document.querySelector('.nav').offsetHeight + 24;
+  let activeId = 'home';
+  navigationTargets.forEach(target=>{
+    if(target.getBoundingClientRect().top + window.scrollY <= activationPoint) activeId = target.id;
+  });
+  if(window.innerHeight + window.scrollY >= document.documentElement.scrollHeight - 2) activeId = 'shops';
+  navigationLinks.forEach(link=>link.classList.toggle('active', link.hash === `#${activeId}`));
+}
+
+window.addEventListener('scroll', updateActiveNavigation, {passive:true});
+window.addEventListener('resize', updateActiveNavigation);
+window.addEventListener('hashchange', updateActiveNavigation);
+updateActiveNavigation();
+
+loadRemedies();
+loadCategories();
+loadChips();
+loadGraph();
+loadShopPreview();
+checkSession();
+</script>
+</body>
+</html>
