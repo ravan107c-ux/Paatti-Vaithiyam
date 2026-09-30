@@ -7,8 +7,8 @@ private until an authorized reviewer approves them.
 This is a small two-part app:
 
 - **`app.py`** — a Python (Flask) REST API backed by SQLite. It stores
-  remedies, runs a rule-based stand-in for the "voice → structured data →
-  safety check" pipeline described in the project brief, and serves the
+  remedies, sends recorded audio to Hugging Face Whisper for transcription,
+  optionally translates non-English transcripts with Gemini, and serves the
   symptom/herb knowledge graph as JSON.
 - **`index.html`** — a single themed HTML/CSS/JS page that calls that API
   directly with `fetch` (no build step needed).
@@ -25,18 +25,41 @@ python app.py
 This starts the API at `http://127.0.0.1:5050` and creates `paatti.db`
 (SQLite) with seed data the first time the app starts — the same example
 remedies from the brief (tulsi cough brew, hibiscus hair oil, neem
-rinse, etc.), plus a couple of extras.
+rinse, etc.) plus eight additional informational demo entries. Existing
+databases are topped up with any missing demo entries on startup.
 
 **2. Open the app**
 
 With the backend running, open `http://127.0.0.1:5050`. Flask serves the
 frontend from the same origin so account sessions work correctly.
 
+## Multilingual Voice Search and Translation (Gemini AI)
+
+Voice recording is powered directly by Google Gemini API:
+- **Hero Voice Search**: Tap the 🎙️ microphone button in the search bar. Speak in **any language** (Tamil, Hindi, Telugu, Malayalam, Bengali, English, etc.). Gemini AI transcribes and translates your speech into English in real-time, inputs it into the search box, and searches remedies automatically.
+- **Share a Remedy**: In the remedy sharing modal, elders and family members can speak naturally in any language. Gemini transcribes and translates the remedy into English for easy review and archival.
+- **API Key Setup**: Add `GEMINI_API_KEY=your_key` to `.env`. You can get a Gemini API key from [Google AI Studio](https://aistudio.google.com/app/apikey).
+
+## Naatu Marundhu Kadai (நாட்டு மருந்து கடை) & Google Maps
+
+Search traditional herbal shops by city across Tamil Nadu:
+- **City Search**: Type any city name (e.g. Madurai, Chennai, Coimbatore, Trichy, Salem, Tirunelveli, Thanjavur, Kumbakonam, Erode, Vellore...) or click one of the quick city chips.
+- **Pre-Loaded Local Shops**: Displays authentic local shops, verified addresses, operating hours, and clickable contact numbers (`tel:` links for instant calling).
+- **Google Maps Redirection**: Click **"🗺️ View on Google Maps"** to open live Google Maps centered on your city showing all nearby Naattu Marundhu Kadai shops. Each shop card also includes direct links for Google Maps view and turn-by-turn directions.
+
 ## Accounts and Review
 
 Create an account with name, phone, email, location, and a password of
 at least 8 characters. Passwords are stored as hashes. Sign in with email
 and password. Remedy submissions require an authenticated session.
+
+Before saving a submission, the server asks Gemini with Google Search grounding
+whether a named ingredient has a general or traditional-use connection to the
+stated problem. Submissions found unrelated or without supporting sources are
+not saved; if Gemini is unavailable, users must retry after it is configured.
+Passing this screen is not evidence of effectiveness or safety. Accepted
+submissions remain private and still require an authorized human reviewer.
+The protected review queue includes Gemini's concise rationale and source links.
 
 New submissions are private with `publication_status: "pending"`. They
 remain out of public search, symptoms, and the knowledge graph until an
@@ -91,13 +114,12 @@ reports that the dataset is unavailable.
   rule-based table. It is not a clinical cross-check and does not verify
   efficacy or safety.
 - **Voice-first submission** — "Share a remedy" records audio with the
-  browser's own `MediaRecorder` API and lets you edit the transcript by
-  hand. It's honest about what it does: there's no real speech-to-text
-  wired in (that needs a paid/hosted Tamil STT model), so it fills in a
-  sample transcript as a placeholder you can replace. Whatever text is
-  submitted is run through `extract_structure()`, a small keyword-based
-  stand-in for the "AI reads the text and pulls out symptom + herbs"
-  step — swap this function for a real NLP/LLM call when you're ready.
+  browser's `MediaRecorder` API, transcribes it with Hugging Face Whisper,
+  and uses Gemini for English translation when the selected spoken language
+  is Tamil, Hindi, or Malayalam. The transcript remains editable before
+  submission. The submitted text is run through `extract_structure()`, a
+  small keyword-based stand-in for the "AI reads the text and pulls out
+  symptom + herbs" step.
 - **Community verification** — "Confirm this remedy" increments a
   `verified` counter per remedy, standing in for the brief's "other
   elders can confirm or add nuance" idea.
@@ -111,11 +133,11 @@ reports that the dataset is unavailable.
 - The safety table is illustrative, not a licensed pharmacology
   database — do not treat it as medical advice, and don't ship it as
   one without a real clinical review process.
-- Speech-to-text and the "structure extraction" step are both rule-based
-  stand-ins so the whole app runs offline with no API keys. The natural
-  next step is swapping `extract_structure()` for a real Tamil STT +
-  LLM extraction call, and `SAFETY_RULES` for a maintained herb–drug
-  interaction dataset reviewed by a pharmacist.
+- Speech-to-text and translation require the optional Hugging Face and
+  Gemini API integrations described above. `extract_structure()` remains a
+  rule-based prototype, and `SAFETY_RULES` is not a maintained herb–drug
+  interaction database; both require clinical and product review before
+  deployment.
 - Kaggle data downloading requires the user's Kaggle credentials and is
   configured manually. Clinical validation remains a separate
   human-review responsibility.
